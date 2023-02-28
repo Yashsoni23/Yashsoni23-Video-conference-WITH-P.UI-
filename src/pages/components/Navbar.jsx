@@ -13,7 +13,7 @@ const Navbar = () => {
   const Logout = () => {
 
     firebase.signout();
-    navigate("/login")
+    navigate("/")
   };
   return (
     <>
