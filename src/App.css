@@ -12,7 +12,16 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.active{
+  background-color: #F59E0B;
+  color: white;
+  border-radius: 50px 50px 50px 50px; 
+  box-shadow: 0 0 10px #00000074;
+}
+.active:hover{
+  background-color: #F59E0B;
+  color: white;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -35,4 +44,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.bg-mobile{
+  background: url("./Assets/7.gif");
+  
+  background-size: cover;
 }
