@@ -10,7 +10,6 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-
 const FirebaseContext = createContext(null);
 
 const firebaseConfig = {
@@ -29,19 +28,18 @@ const auth = getAuth(app);
 const database = getDatabase(app);
 export const useFirebase = () => useContext(FirebaseContext);
 
-
 export const FirebaseProvider = (props) => {
-  const [User, setUser] = useState(null);
+  const [user, setUser] = useState(null);
   const [userDetail, setUserDetail] = useState();
+
   useEffect(() => {
-    onAuthStateChanged(auth,( user) => {
+    onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        console.log(User,"This is User");
         get(child(ref(database), `users/` + user.uid))
           .then((snapshot) => {
             setUserDetail(snapshot.val());
-            console.log(userDetail,"This is UserDetail");
+            // console.log(snapshot, "This is UserDetail");
           })
           .catch((error) => console.log(error));
       } else {
@@ -49,25 +47,28 @@ export const FirebaseProvider = (props) => {
       }
     });
   }, []);
+  const isLoggedIn = user ? true : false;
 
-  const isLoggedIn = User ? true : false;
   const signUp = async (email, password) => {
     return await createUserWithEmailAndPassword(auth, email, password);
   };
   const signIn = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password);
   };
+
   const UserDetails = async (FirstName, LastName, email, password) => {
-    return set(ref(database, "users/" + User.uid), {
+    return set(ref(database, "users/" + user.uid), {
       FirstName,
       LastName,
       email,
       password,
-      uid: User.uid,
+      uid: user.uid,
     });
   };
 
-  const signout = signOut(auth);
+  const signout = async()=>{
+    return await signOut(auth);
+  } 
   return (
     <>
       <FirebaseContext.Provider
