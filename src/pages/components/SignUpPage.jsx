@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useFirebase } from "../context/firebase";
 import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [Password, setPassword] = useState();
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
   const firebase = useFirebase();
-    useEffect(()=>{
-        // if(firebase.isLoggedIn){
-        //     navigate("/")
-        // }
-        
-    },[firebase,navigate])
+  useEffect(() => {
+    // if(firebase.isLoggedIn){
+    //     navigate("/")
+    // }
+  }, [firebase, navigate]);
   const toastSuccess = () => {
     toast("Logged In Successful", {
       autoClose: true,
@@ -25,12 +24,18 @@ const SignUp = () => {
   };
   const handleSignUp = (e) => {
     e.preventDefault();
-    
     firebase
-      .signUp(email, Password)
+      .UserDetails(FirstName, LastName, email, Password)
       .then((data) => {
-        toastSuccess();
-        console.log(data);
+        firebase
+          .signUp(email, Password)
+          .then((data) => {
+            toastSuccess();
+            console.log(data);
+          })
+          .catch((error) => {
+            toast(`error ${error}`);
+          });
       })
       .catch((error) => {
         toast(`error ${error}`);
@@ -43,15 +48,16 @@ const SignUp = () => {
 
       <form
         action=""
-        className="flex gap-3 w-1/2 h-1/2 justify-center items-center bg-slate-400 flex-col"
+        className="flex gap-5 w-max p-14 h-1/2 justify-center items-center flex-col"
       >
+        <h1 className="font-bold text-2xl text-white">Sign Up</h1>
         <input
           value={FirstName}
           onChange={(e) => {
             setFirstName(e.target.value);
           }}
           type="text"
-          className=" rounded-md focus:outline-none p-2 w-1/2 font-bold pl-2"
+          className=" border-b-[1px] focus:border-b-2 focus:border-teal-900 border-cyan-700 bg-transparent placeholder:text-cyan-900 text-cyan-900  focus:outline-none p-2 w-full font-bold pl-2"
           placeholder="First Name"
         />
         <input
@@ -60,7 +66,7 @@ const SignUp = () => {
             setLastName(e.target.value);
           }}
           type="text"
-          className=" rounded-md focus:outline-none p-2 w-1/2 font-bold pl-2"
+          className=" border-b-[1px] focus:border-b-2 focus:border-teal-900 border-cyan-700 bg-transparent placeholder:text-cyan-900 text-cyan-900  focus:outline-none p-2 w-full font-bold pl-2"
           placeholder="Last Name"
         />
         <input
@@ -69,7 +75,7 @@ const SignUp = () => {
             setEmail(e.target.value);
           }}
           type="email"
-          className=" rounded-md focus:outline-none p-2 w-1/2 font-bold pl-2"
+          className=" border-b-[1px] focus:border-b-2 focus:border-teal-900 border-cyan-700 bg-transparent placeholder:text-cyan-900 text-cyan-900  focus:outline-none p-2 w-full font-bold pl-2"
           placeholder="Email"
         />
         <input
@@ -78,12 +84,12 @@ const SignUp = () => {
             setPassword(e.target.value);
           }}
           type="password"
-          className=" rounded-md focus:outline-none p-2 w-1/2 font-bold pl-2"
+          className=" border-b-[1px] focus:border-b-2 focus:border-teal-900 border-cyan-700 bg-transparent placeholder:text-cyan-900 text-cyan-900 focus:bg-transparent focus:outline-none p-2 w-full font-bold pl-2"
           placeholder="Password"
         />
         <button
           type="submit"
-          className="p-2 rounded-md hover:bg-white hover:text-black transition-all duration-300 hover:border-2 hover:border-black bg-black text-white font-bold w-1/2"
+          className="p-2  rounded-full hover:bg-white hover:text-cyan-900 transition-all duration-300 hover:border-2 hover:border-cyan-900 bg-cyan-900 text-white font-bold w-full"
           onClick={handleSignUp}
         >
           SignUp
