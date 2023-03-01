@@ -36,7 +36,8 @@ export const FirebaseProvider = (props) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        get(child(ref(database), `users/` + user.uid))
+        console.log(user.uid);
+        get(child(ref(database), `users/` + user.displayName))
           .then((snapshot) => {
             setUserDetail(snapshot.val());
             // console.log(snapshot, "This is UserDetail");
@@ -55,14 +56,14 @@ export const FirebaseProvider = (props) => {
   const signIn = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password);
   };
-
+  
   const UserDetails = async (FirstName, LastName, email, password) => {
-    return set(ref(database, "users/" + user.uid), {
+    return set(ref(database, "users/" + FirstName), {
       FirstName,
       LastName,
       email,
       password,
-      uid: user.uid,
+      // uid: user.uid,
     });
   };
 

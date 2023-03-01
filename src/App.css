@@ -48,6 +48,9 @@
 
 .bg-mobile{
   background: url("./Assets/7.gif");
-  
+  background-size: cover;
+}
+.bg-laptop{
+  background: url("./Assets/3\ .gif");
   background-size: cover;
 }
