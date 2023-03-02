@@ -3,6 +3,7 @@ import { useFirebase } from "../context/firebase";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import Loading from "./Loading";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ const SignUp = () => {
   const [Password, setPassword] = useState();
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
   const firebase = useFirebase();
   useEffect(() => {
     // if(firebase.isLoggedIn){
@@ -23,6 +26,7 @@ const SignUp = () => {
     });
   };
   const handleSignUp = (e) => {
+    setIsLoading(true);
     e.preventDefault();
     firebase
       .UserDetails(FirstName, LastName, email, Password)
@@ -31,20 +35,25 @@ const SignUp = () => {
           .signUp(email, Password)
           .then((data) => {
             toastSuccess();
+            setIsLoading(false);
             console.log(data);
           })
           .catch((error) => {
             toast(`error ${error}`);
+            setIsLoading(false);
           });
       })
       .catch((error) => {
         toast(`error ${error}`);
+        setIsLoading(false);
+
       });
   };
 
   return (
     <>
       <ToastContainer />
+      {isLoading ? <Loading /> : ""}
 
       <form
         action=""

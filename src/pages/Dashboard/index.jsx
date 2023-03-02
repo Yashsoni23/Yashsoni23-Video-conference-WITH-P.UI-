@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 import Navbar from "../components/Navbar";
 import { useFirebase } from "../context/firebase";
 const Dashboard = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [room, setRoom] = useState("");
   const firebase = useFirebase();
   const navigate = useNavigate();
   useEffect(
     (e) => {
+      setIsLoading(true);
       if (!firebase.isLoggedIn) {
         navigate("/");
       }
+      setIsLoading(false);
+
     },
     [navigate]
   );
@@ -22,6 +27,7 @@ const Dashboard = () => {
     <>
       <div className="flex bg-white sm:flex-row flex-col justify-center items-center w-screen gap-4 h-screen">
         <Navbar />
+        {isLoading ? <Loading /> : ""}
         <div className="flex bg-mobile  sm:w-1/2 w-[320px] h-[320px] bg-center sm:h-full  "></div>
 
         <div className="flex w-1/2 p-8 pt-22  flex-col gap-5">
