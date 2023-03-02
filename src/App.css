@@ -45,6 +45,15 @@
     transform: rotate(360deg);
   }
 }
+.loadGif{
+  width: 300px;
+  height: 300px;
+  background: url("./Assets/Load1\ \(4\).gif") ;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  
+}
 
 .bg-mobile{
   background: url("./Assets/7.gif");
