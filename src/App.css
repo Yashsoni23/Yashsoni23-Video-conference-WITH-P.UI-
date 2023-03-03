@@ -48,8 +48,8 @@ body::-webkit-scrollbar{
   }
 }
 .loadGif{
-  width: 200px;
-  height: 200px;
+  width: 125px;
+  height: 125px;
   background: url("./Assets/Load1\ \(4\).gif") ;
   background-size: contain;
   background-repeat: no-repeat;
