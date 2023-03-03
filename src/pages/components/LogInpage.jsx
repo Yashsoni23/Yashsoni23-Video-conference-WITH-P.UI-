@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useFirebase } from "../context/firebase";
 import {BiUser} from "react-icons/bi"
+import Loading from "./Loading";
+import {FcGoogle} from "react-icons/fc"
+
+
+
 const LogIn = () => {
+  const [isLoading,setIsLoading] = useState(false);
   const [email, setEmail] = useState();
   const [Password, setPassword] = useState();
   const firebase = useFirebase();
@@ -25,25 +31,36 @@ const LogIn = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setIsLoading(true)
     // console.log(email,Password);
     firebase.signIn(email, Password)
     .then((result) => {
       toastSuccess();
       navigate("/Dashboard");
       console.log(firebase.isLoggedIn);
+    setIsLoading(false)
+
     })
     .catch((error)=>{
       toastError(error);
+    setIsLoading(false)
+
     });
     
   };
+  const SignInGoogle = ()=>{
+    setIsLoading(true);
+    
+    firebase.signInWIthGoogle()
+  }
 
   return (
     <>
     <ToastContainer/>
+    {isLoading?<Loading/>:""}
       <form
         action=""
-        className="flex gap-5 w-max p-14 h-1/2 justify-center items-center flex-col"
+        className="flex gap-5 w-max p-12  h-1/2 justify-center items-center flex-col"
       >
         <div className="flex flex-col gap-4">
             <div className="flex justify-center items-center w-[100px] h-[100px] bg-cyan-900 rounded-full">
@@ -76,6 +93,10 @@ const LogIn = () => {
         >
           Login
         </button>
+        <div onClick={SignInGoogle}  className="gl cursor-pointer flex gap-5 drop-shadow-2xl p-3 rounded-full bg-white">
+              <FcGoogle className="text-3xl drop-shadow-2xl"/>
+            <span className="text-xl font-bold text-teal-900"> Sign With Google</span>
+            </div>
       </form>
     </>
   );

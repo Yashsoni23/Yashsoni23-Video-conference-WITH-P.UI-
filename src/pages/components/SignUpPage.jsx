@@ -26,8 +26,9 @@ const SignUp = () => {
     });
   };
   const handleSignUp = (e) => {
-    setIsLoading(true);
     e.preventDefault();
+    setIsLoading(true);
+
     firebase
       .UserDetails(FirstName, LastName, email, Password)
       .then((data) => {
@@ -57,7 +58,7 @@ const SignUp = () => {
 
       <form
         action=""
-        className="flex gap-5 w-max p-14 h-1/2 justify-center items-center flex-col"
+        className="flex gap-5 w-max pb-10 pl-10 pr-10 pt-10  h-1/2 justify-center items-center flex-col"
       >
         <h1 className="font-bold text-2xl text-white">Sign Up</h1>
         <input
@@ -104,6 +105,7 @@ const SignUp = () => {
           SignUp
         </button>
       </form>
+
     </>
   );
 };

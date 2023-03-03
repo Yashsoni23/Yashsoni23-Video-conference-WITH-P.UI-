@@ -91,3 +91,7 @@ body::-webkit-scrollbar{
   background: url("./Assets/3\ .gif");
   background-size: cover;
 }
+
+.gl{
+  box-shadow: 0 0 7px #0000004a;
+}
