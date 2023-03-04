@@ -48,8 +48,8 @@ body::-webkit-scrollbar{
   }
 }
 .loadGif{
-  width: 200px;
-  height: 200px;
+  width: 125px;
+  height: 125px;
   background: url("./Assets/Load1\ \(4\).gif") ;
   background-size: contain;
   background-repeat: no-repeat;
@@ -90,4 +90,8 @@ body::-webkit-scrollbar{
 .bg-laptop{
   background: url("./Assets/3\ .gif");
   background-size: cover;
+}
+
+.gl{
+  box-shadow: 0 0 7px #0000004a;
 }

@@ -24,13 +24,11 @@ const RoomPage = () => {
   };
   return (
     <>
-      <div className="flex bg-slate-200 flex-col justify-center items-center w-screen gap-4 h-screen">
-        <h1 className="text-3xl font-bold ">Room {roomid}</h1>
-
+      <div className="flex bg-gradient-to-tr from-teal-800 to-blue-600  flex-col justify-center items-center w-screen gap-4 h-screen">
         <div
-          className="myCallContainer"
+          className="myCallContainer rounded-3xl overflow-hidden "
           ref={myMeeting}
-          style={{ width: "80vw", height: "80vh" }}
+          style={{ width: "95vw", height: "95vh" }}
         ></div>
       </div>
     </>

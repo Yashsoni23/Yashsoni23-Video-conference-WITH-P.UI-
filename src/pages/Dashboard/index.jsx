@@ -25,9 +25,10 @@ const Dashboard = () => {
   };
   return (
     <>
+        {isLoading ? <Loading /> : ""}
+
       <div className="flex bg-white sm:flex-row flex-col justify-center items-center w-screen gap-4 h-screen">
         <Navbar />
-        {isLoading ? <Loading /> : ""}
         <div className="flex bg-mobile  sm:w-1/2 w-[320px] h-[320px] bg-center sm:h-full  "></div>
 
         <div className="flex w-1/2 p-8 pt-22  flex-col gap-5">

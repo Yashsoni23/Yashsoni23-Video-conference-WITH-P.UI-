@@ -8,9 +8,12 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 
 const FirebaseContext = createContext(null);
+const provider = new GoogleAuthProvider();
 
 const firebaseConfig = {
   apiKey: "AIzaSyChBqVPNvHMmKcVQSq0QCM-2B7zif4YNho",
@@ -36,7 +39,7 @@ export const FirebaseProvider = (props) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        console.log(user.uid);
+        // console.log(user.uid);
         get(child(ref(database), `users/` + user.displayName))
           .then((snapshot) => {
             setUserDetail(snapshot.val());
@@ -56,7 +59,7 @@ export const FirebaseProvider = (props) => {
   const signIn = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password);
   };
-  
+
   const UserDetails = async (FirstName, LastName, email, password) => {
     return set(ref(database, "users/" + FirstName), {
       FirstName,
@@ -67,9 +70,16 @@ export const FirebaseProvider = (props) => {
     });
   };
 
-  const signout = async()=>{
+  const signout = async () => {
     return await signOut(auth);
-  } 
+  };
+  const signInWIthGoogle = async () => {
+    return await signInWithPopup(auth, provider).then((result) => {
+            if(result.user){
+              
+            }
+    });
+  };
   return (
     <>
       <FirebaseContext.Provider
@@ -80,6 +90,7 @@ export const FirebaseProvider = (props) => {
           UserDetails,
           userDetail,
           isLoggedIn,
+          signInWIthGoogle
         }}
       >
         {props.children}
