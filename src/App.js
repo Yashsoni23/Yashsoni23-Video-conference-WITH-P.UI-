@@ -4,6 +4,7 @@ import Home from './pages/Login';
 import RoomPage from './pages/Conference';
 import Chatroom from './pages/Chats';
 import Dashboard from "./pages/Dashboard"
+import FireChatRoom from './pages/Firechatroom';
 function App() {
   return (
     <div className="App">
@@ -11,6 +12,7 @@ function App() {
 
       <Route path='/Dashboard' element={<Dashboard/>}/>
       <Route path='/' element={<Home/>}/>
+      <Route path='/firechat' element={<FireChatRoom/>}/>
       <Route path='/Conference/:roomid' element={<RoomPage/>}/>
       <Route path='/chat/:roomid' element={<Chatroom/>}/>
      </Routes>
