@@ -8,7 +8,7 @@ import {
   getFirestore,
   getDoc,
   doc,
-  getDocs
+  getDocs,
 } from "firebase/firestore";
 
 import { initializeApp, FirebaseApp } from "firebase/app";
@@ -47,19 +47,21 @@ export const useFirebase = () => useContext(FirebaseContext);
 export const FirebaseProvider = (props) => {
   const [user, setUser] = useState(null);
   const [userName, setUserName] = useState(null);
+  const [Uid, setUid] = useState();
   const [userDetail, setUserDetail] = useState();
+  
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
         // console.log(user.uid);
+        setUid(user.uid);
         setUserName(user.displayName);
         get(child(ref(database), `users/` + user.displayName))
           .then((snapshot) => {
             setUserDetail(snapshot.val());
-            // console.log(snapshot, "This is UserDetail");
-
+            // console.log(snapshot.val(), "This is UserDetail");
           })
           .catch((error) => console.log(error));
       } else {
@@ -115,13 +117,6 @@ export const FirebaseProvider = (props) => {
     }
   };
 
-  const getMessages = async()=>{
-    const  messages = await getDocs(collection(db,"messages"));
-    messages.forEach((msg)=>{
-      console.log(msg.id,'==>',msg.data());
-    })
-  }
-
   return (
     <>
       <FirebaseContext.Provider
@@ -135,7 +130,9 @@ export const FirebaseProvider = (props) => {
           isLoggedIn,
           signInWIthGoogle,
           sendMessage,
-          getMessages
+          db,
+          Uid
+          
         }}
       >
         {props.children}
