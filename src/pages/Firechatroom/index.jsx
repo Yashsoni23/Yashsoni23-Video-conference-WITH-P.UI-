@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useFirebase } from "../context/firebase";
-import { IoSend } from "react-icons/io5";
+import { IoMail, IoSend } from "react-icons/io5";
 import { useEffect } from "react";
 import Message from "./Message";
 import { collection, getDocs } from "firebase/firestore";
@@ -10,22 +10,24 @@ const FireChatRoom = () => {
   const firebase = useFirebase();
   //   console.log(firebase.messages);
   const [text, setText] = useState("");
+  const [msgData, setMessageData] = useState("");
   const [Messages, setMessages] = useState([]);
   const isMsgs = Messages ? true : false;
   const getMessages = async () => {
     const messages = await getDocs(collection(firebase.db, "messages"));
     // setMessages([messages]);
-    console.log(typeof Messages);
-     
+    Messages.forEach((msg)=>{
+      console.log(msg.data());
+      setMessageData(msg.data());
+    })
     //  ((msg) => {
     //   // setMessages([..,msg.data()])
     //   setMessages([msg.data()]);
     //   //   console.log(msg.data().text);
-    //   //   <Message text={msg.data().text}/>
+    //   //   <Message text={msg.data(z).text}/>
     // });
-    setMessages(messages.docs)
-  console.log();
-
+    setMessages(messages.docs);
+    console.log(msgData);
   };
   useEffect(() => {
     getMessages();
@@ -47,15 +49,15 @@ const FireChatRoom = () => {
           </span>
 
           <div className="msgs pt-10  absolute -z-50 w-full h-full ">
-            {Messages.forEach((msg)=>{
-                const {text,photoURL} = msg;
-                Messages.map((ele)=>{
-                    return console.log(ele
-                        
-                        );
-                })
-            })
-        }
+            {Messages&&Messages.forEach((msg)=>{
+              return <h1>{msg.data().text}</h1>
+            })}
+            <div className="msg flex justify-center gap-1 flex-row-reverse items-center recieve p-1">
+              <p className="text-xs bg-teal-100 p-1 pl-2 pr-2 rounded-3xl font-medium">
+                {text}
+              </p>
+              <div className="photo w-[27px] h-[27px]  shadow-2xl rounded-full bg-teal-600"></div>
+            </div>
           </div>
 
           <div className="flex absolute p-3 justify-center items-center  w-full bottom-2">
