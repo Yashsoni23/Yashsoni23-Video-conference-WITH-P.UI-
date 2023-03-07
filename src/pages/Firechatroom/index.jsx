@@ -16,10 +16,10 @@ const FireChatRoom = () => {
   const getMessages = async () => {
     const messages = await getDocs(collection(firebase.db, "messages"));
     // setMessages([messages]);
-    Messages.forEach((msg)=>{
+    Messages.forEach((msg) => {
       console.log(msg.data());
       setMessageData(msg.data());
-    })
+    });
     //  ((msg) => {
     //   // setMessages([..,msg.data()])
     //   setMessages([msg.data()]);
@@ -48,16 +48,21 @@ const FireChatRoom = () => {
             <span className="block rounded-full sm:w-[14px] sm:h-[14px] bg-slate-900"></span>
           </span>
 
-          <div className="msgs pt-10  absolute -z-50 w-full h-full ">
-            {Messages&&Messages.forEach((msg)=>{
-              return <h1>{msg.data().text}</h1>
-            })}
-            <div className="msg flex justify-center gap-1 flex-row-reverse items-center recieve p-1">
-              <p className="text-xs bg-teal-100 p-1 pl-2 pr-2 rounded-3xl font-medium">
-                {text}
-              </p>
-              <div className="photo w-[27px] h-[27px]  shadow-2xl rounded-full bg-teal-600"></div>
-            </div>
+          <div className="msgs pt-10 flex flex-col  absolute -z-50 w-full h-full ">
+            {Messages &&
+              Messages.map((msg) => {
+                const { uid, createdAt, photoURL, text } = msg.data();
+                return (
+                  <>
+                    <div className="msg flex   gap-1 flex-row items-center recieve p-1">
+                      <p className="text-xs bg-teal-100 p-1 pl-2 pr-2 rounded-3xl font-medium">
+                        {text}
+                      </p>
+                      <div className="photo w-[27px] h-[27px]  shadow-2xl rounded-full bg-teal-600"></div>
+                    </div>
+                  </>
+                );
+              })}
           </div>
 
           <div className="flex absolute p-3 justify-center items-center  w-full bottom-2">
