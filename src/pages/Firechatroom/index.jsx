@@ -4,20 +4,25 @@ import { useFirebase } from "../context/firebase";
 import { IoMail, IoSend } from "react-icons/io5";
 import { useEffect } from "react";
 import Message from "./Message";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy } from "firebase/firestore";
+import { useCollection } from "react-firebase-hooks/firestore";
+import Moment from 'react-moment';
 
 const FireChatRoom = () => {
   const firebase = useFirebase();
-  //   console.log(firebase.messages);
+  // console.log(firebase.Uid);
   const [text, setText] = useState("");
   const [msgData, setMessageData] = useState("");
   const [Messages, setMessages] = useState([]);
   const isMsgs = Messages ? true : false;
   const getMessages = async () => {
-    const messages = await getDocs(collection(firebase.db, "messages"));
+    const messages = await getDocs(
+      collection(firebase.db, "messages"),
+      orderBy("createdAt")
+    );
+    // const allMsgs = await useCollection()
     // setMessages([messages]);
     Messages.forEach((msg) => {
-      console.log(msg.data());
       setMessageData(msg.data());
     });
     //  ((msg) => {
@@ -26,39 +31,70 @@ const FireChatRoom = () => {
     //   //   console.log(msg.data().text);
     //   //   <Message text={msg.data(z).text}/>
     // });
-    setMessages(messages.docs);
-    console.log(msgData);
+    setMessages(messages.docs.sort());
+    // console.log(msgData);
   };
   useEffect(() => {
     getMessages();
   }, []);
-  const time = new Date();
+  const time =Date.now();
+   const sendMsgOnEnter = (e)=>(e.keycode===13?sendMsg:"")
+  
   const sendMsg = (e) => {
     e.preventDefault();
+    
+      firebase.sendMessage(text, time);
+      getMessages();
+      setText("");
+    
     firebase.sendMessage(text, time);
-  };
+    getMessages();
+    setText("");
+  }
+ 
+  // ;const today  = new Date(1677954971)
+  // console.log(today);
 
   return (
     <>
-      <div className="flex bg-white  justify-center items-center  w-screen h-screen">
-        <div className="flex relative sm:bg-teal-300 mbp z-20 justify-center items-center  w-screen sm:w-[305px] sm:border-[10px] border-black sm:h-[90%] h-screen rounded-3xl overflow-hidden ">
+      <div className="flex bg-white fixed  justify-center items-center  w-screen h-screen">
+        <div className="flex relative sm:bg-teal-300 mbp z-20  justify-center pb-20  w-screen sm:w-[305px] sm:border-[10px] border-black sm:h-[90%] h-screen rounded-3xl overflow-hidden ">
           <span className="flex justify-start gap-3 pl-1 items-center absolute sm:w-[110px] sm:h-6 rounded-full top-2 bg-black">
             <span className="block rounded-full sm:w-[18px] sm:h-[18px] bg-slate-900"></span>
             <span className="block rounded-full sm:w-[62px] sm:h-[5px] bg-slate-700"></span>
             <span className="block rounded-full sm:w-[14px] sm:h-[14px] bg-slate-900"></span>
           </span>
 
-          <div className="msgs pt-10 flex flex-col  absolute -z-50 w-full h-full ">
+          <div className="msgs pt-10 flex flex-col overflow-scroll absolute -z-50 w-full sm:h-[500px] h-4/5 ">
             {Messages &&
               Messages.map((msg) => {
                 const { uid, createdAt, photoURL, text } = msg.data();
                 return (
                   <>
-                    <div className="msg flex   gap-1 flex-row items-center recieve p-1">
+                    <div
+                      key={msg.id}
+                      className={`msg w-full flex  gap-1   ${
+                        uid === firebase.Uid ? "sent" : "recieve"
+                      } p-1`}
+                    >
                       <p className="text-xs bg-teal-100 p-1 pl-2 pr-2 rounded-3xl font-medium">
-                        {text}
+                        {createdAt.seconds}
+                        <p>
+                          {" "}
+                          
+                          <Moment fromNow ago >
+                          {createdAt.seconds}
+                          </Moment>
+                        </p>
+                        {/* <p>{createdAt.seconds.toTimeString()}</p> */}
                       </p>
-                      <div className="photo w-[27px] h-[27px]  shadow-2xl rounded-full bg-teal-600"></div>
+                      <div className="photo w-[27px] h-[27px] overflow-hidden shadow-2xl rounded-full bg-teal-600">
+                        <img
+                          src={photoURL ? photoURL : "user.png"}
+                          alt=""
+                          className="w-full h-full"
+                        />
+                      </div>
                     </div>
                   </>
                 );
@@ -77,6 +113,7 @@ const FireChatRoom = () => {
               {text ? (
                 <button
                   onClick={sendMsg}
+                  onKeyDown={sendMsgOnEnter}
                   className="p-2 rounded-full m-auto top-1 right-3  w-[35px] h-[35px] absolute overflow-hidden bs font-bold bg-teal-700 flex justify-center items-center shadow-2xl"
                 >
                   <IoSend className="text-white" />
