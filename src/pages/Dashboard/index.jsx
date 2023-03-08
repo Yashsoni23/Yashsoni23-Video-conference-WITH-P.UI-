@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { useFirebase } from "../context/firebase";
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("Room number Can't be empty");
   const [room, setRoom] = useState("");
   const firebase = useFirebase();
   const navigate = useNavigate();
@@ -19,9 +20,23 @@ const Dashboard = () => {
     },
     [navigate]
   );
+  const isValid = () =>{
+    if(!room || room===null || room===String){
+      // setErrorMsg("Room number Can't be empty !!!")
+      return false;
+    }else if(room===0 ||room<0|| room<100){
+      return false;
+    }else if(room<1000 && room>99){
+      return true;
+    }
+  }
+  const isvalid = isValid();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/Conference/${room}`);
+    if(isvalid){
+      navigate(`/Conference/${room}`);
+    }
   };
   return (
     <>
@@ -31,7 +46,7 @@ const Dashboard = () => {
         <Navbar />
         <div className="flex bg-mobile  sm:w-1/2 w-[320px] h-[320px] bg-center sm:h-full  "></div>
 
-        <div className="flex w-1/2 p-8 pt-22  flex-col gap-5">
+        <div className="flex w-1/2 p-8 pt-22 sm:pt-10  flex-col gap-5">
           <h1 className="sm:text-3xl text-2xl font-bold ">Join Now</h1>
 
           <form
@@ -57,6 +72,9 @@ const Dashboard = () => {
                   required
                 />
               </div>
+              {errorMsg?<div className="error bg-white font-bold border-4 p-2 w-full border-red-600 text-red-600 ">
+              {errorMsg}
+              </div>:""}
 
               <button
                 type="submit"

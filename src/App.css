@@ -58,6 +58,26 @@ body::-webkit-scrollbar{
   /* animation: out 6s infinite linear ; */
 
 }
+textarea{
+  resize: none;
+  box-shadow: 0 0 10px #000;
+}
+.msgs::-webkit-scrollbar{
+  display: none;
+}
+.sent{
+  float: right;
+  clear: both;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.recieve{
+  float: left;
+  clear: both;
+  justify-content: flex-end;
+  /* background: #000; */
+  flex-direction: row-reverse;
+}
 @keyframes out {
   0%{
     transform: rotate(0deg);
@@ -95,3 +115,13 @@ body::-webkit-scrollbar{
 .gl{
   box-shadow: 0 0 7px #0000004a;
 }
+.mbp{
+  border-radius: 60px;
+}
+.chatbg{
+  background: url("./Assets/chatbg.png");
+  background-size: cover;
+}
+/* .photo{
+  background: url("./Assets/user.png");
+} */

@@ -1,6 +1,18 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { initializeApp } from "firebase/app";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import {
+  collection,
+  addDoc,
+  getFirestore,
+  getDoc,
+  doc,
+  getDocs,
+} from "firebase/firestore";
+
+import { initializeApp, FirebaseApp } from "firebase/app";
+import firebase from "firebase/app";
 import { getDatabase, get, set, ref, child } from "firebase/database";
 import {
   getAuth,
@@ -13,8 +25,8 @@ import {
 } from "firebase/auth";
 
 const FirebaseContext = createContext(null);
-const provider = new GoogleAuthProvider();
 
+const provider = new GoogleAuthProvider();
 const firebaseConfig = {
   apiKey: "AIzaSyChBqVPNvHMmKcVQSq0QCM-2B7zif4YNho",
   authDomain: "videoconferenceweb.firebaseapp.com",
@@ -29,21 +41,27 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
+const db = getFirestore(app);
 export const useFirebase = () => useContext(FirebaseContext);
 
 export const FirebaseProvider = (props) => {
   const [user, setUser] = useState(null);
+  const [userName, setUserName] = useState(null);
+  const [Uid, setUid] = useState();
   const [userDetail, setUserDetail] = useState();
+  
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
         // console.log(user.uid);
+        setUid(user.uid);
+        setUserName(user.displayName);
         get(child(ref(database), `users/` + user.displayName))
           .then((snapshot) => {
             setUserDetail(snapshot.val());
-            // console.log(snapshot, "This is UserDetail");
+            // console.log(snapshot.val(), "This is UserDetail");
           })
           .catch((error) => console.log(error));
       } else {
@@ -75,11 +93,30 @@ export const FirebaseProvider = (props) => {
   };
   const signInWIthGoogle = async () => {
     return await signInWithPopup(auth, provider).then((result) => {
-            if(result.user){
-              
-            }
+      if (result.user) {
+      }
     });
   };
+
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FireChat Functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  const sendMessage = async (text, time) => {
+    try {
+      const uid = auth.currentUser.uid;
+      const photoURL = auth.currentUser.photoURL;
+
+      const docRef = await addDoc(collection(db, "messages"), {
+        text: text,
+        createdAt: time,
+        uid,
+        photoURL,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <FirebaseContext.Provider
@@ -89,8 +126,13 @@ export const FirebaseProvider = (props) => {
           signout,
           UserDetails,
           userDetail,
+          userName,
           isLoggedIn,
-          signInWIthGoogle
+          signInWIthGoogle,
+          sendMessage,
+          db,
+          Uid
+          
         }}
       >
         {props.children}

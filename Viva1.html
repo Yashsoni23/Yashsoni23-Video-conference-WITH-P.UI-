@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/ss/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquerycom/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdeliv.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <style>
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        .bg-opa {
+            background-color: #0000006f;
+        }
+
+        .bg-img {
+            background: url("https://img.freepik.com/free-photo/smart-confidence-asian-female-startup-entrepreneur-small-business-owner-businesswoman-wear-smart-casual-cloth-smile-hand-use-tablet-woking-inventory-checking-showroom-office-daytime-background_609648-342.jpg?w=996&t=st=1677467763~exp=1677468363~hmac=bd52972f366996d3cf0bdd7ea7f4ecca6106f35c98f0e2effd6c0cf824d7bed0");
+            background-size: cover;
+            background-position-x: -20rem;
+            background-position-y: 5rem;
+            background-repeat: no-repeat;
+
+        }
+
+        .myshadow {
+            box-shadow: 0px 10px 15px #0000008e;
+        }
+
+        .text-shadow {
+            text-shadow: 0 0 7px #0000008e;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex overflow-hidden bg-gray-600 relative  w-screen h-screen">
+        <nav class="flex z-50 bg-opa absolute top-0 w-full  justify-between  items-center">
+            <h1 class="text-4xl  font-bold text-orange-500 p-3">SQE</h1>
+
+            <ul class="flex text-2xl font-bold">
+                <li
+                    class=" p-3 list-none hover:text-orange-500 cursor-pointer text-white text-shadow transition-all duration-300">
+                    Home</li>
+                <li
+                    class=" p-3 list-none hover:text-orange-500 cursor-pointer text-white text-shadow transition-all duration-300">
+                    About</li>
+                <li
+                    class=" p-3 list-none hover:text-orange-500 cursor-pointer text-white text-shadow transition-all duration-300">
+                    Services</li>
+                <li
+                    class=" p-3 list-none hover:text-orange-500 cursor-pointer text-white text-shadow transition-all duration-300">
+                    Works </li>
+                <li
+                    class=" p-3 list-none hover:text-orange-500 cursor-pointer text-white text-shadow transition-all duration-300">
+                    Teams</li>
+                <li
+                    class=" p-3 list-none hover:text-orange-500 cursor-pointer text-white text-shadow transition-all duration-300">
+                    Price</li>
+                <li
+                    class=" p-3 list-none hover:text-orange-500 cursor-pointer text-white text-shadow transition-all duration-300">
+                    Blogs</li>
+                <li
+                    class=" p-3 list-none hover:text-orange-500 cursor-pointer text-white text-shadow transition-all duration-300">
+                    Contect</li>
+            </ul>
+        </nav>
+        <div class="flex flex-col justify-center items-center  w-1/2 h-full gap-4">
+            <div class="flex gap-4 w-full pl-20 pt-28  h-4/5 flex-col justify-center items-start ">
+                <h1 class="text-orange-500 font-bold text-2xl">
+                    Digital Agency
+                </h1>
+                <h1 class="font-bold text-white text-shadow text-7xl w-full">Grow your</h1>
+                <h1 class="font-bold text-white text-shadow text-6xl w-full">Business With Us</h1>
+                <h1 class="font-bold text-white text-shadow text-xl w-full">Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit.
+                    Pariatur iusto necessitatibus officiis, possimus quis voluptatem praesentium saepe recusandae in
+                    sit?</h1>
+                <h1
+                    class="text-2xl border-2 border-orange-500 flex justify-center items-center gap-2 text-white text-shadow p-3 font-bold">
+                    More About -> <span
+                        class="w-[2rem] flex justify-center items-center  m-auto bg-orange-500 h-[2rem]"><i
+                            style="font-size:24px" class="fa">&#xf152;</i></span></h1>
+
+            </div>
+            <div
+                class="flex w-[40rem] absolute -right-20 -top-20 rounded-full border-b-[20px] bg-img border-orange-500 h-[40rem]  bg-gray-900 myshadow">
+            </div>
+        </div>
+
+
+    </div>
+    <div class="flex w-screen bg-gray-100 h-screen">
+        <div class="flex  gap-10 pt-28 p-5 h-full ml-[5%]  w-[30%] flex-col">
+            <h1 class="text-4xl font-bold text-black">Why choose us</h1>
+            <p class="text-xl text-justify font-semibold">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Beatae veniam voluptates numquam impedit minima nemo ea! Sapiente ducimus adipisci porro quos
+                voluptatem.</p>
+            <p class="text-xl text-justify font-semibold">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Natus sapiente placeat eum delectus labore nostrum itaque eaque porro hic sunt sequi beatae repellat, ad
+                nam laboriosam quo! Rerum ea quo, porro quos mollitia sunt repudiandae. Cumque rerum blanditiis, aperiam
+                eius qui ?</p>
+        </div>
+        <div class="w-[65%]  justify-center gap-5 items-center h-full flex ">
+            <div class="flex  pl-10 h-4/5   gap-16  flex-col">
+
+
+                <div
+                    class="flex bg-gray-100  myshadow  justify-center items-center text-center w-[20rem] h-[20rem] flex-col gap-4 p-4">
+                    <div class="flex  w-[5rem]  h-[5rem] border-2 border-orange-500"></div>
+                    <h1>Strategy & reserch</h1>
+                    <h3>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo.</h3>
+                </div>
+
+
+                <div
+                    class="flex bg-gray-100 myshadow   justify-center items-center text-center w-[18rem] h-[18rem]  flex-col gap-4 p-4">
+                    <div class="flex w-[5rem]  h-[5rem] border-2 border-orange-500"></div>
+                    <h1></h1>
+                    <h3>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo.</h3>
+                </div>
+
+
+            </div>
+
+
+
+            <div class="flex justify-end items-end pl-10 h-4/5  gap-16  flex-col">
+                <div
+                    class="flex bg-gray-100 myshadow   justify-center items-center text-center w-[18rem] h-[18rem] flex-col gap-4 p-4">
+                    <div class="flex w-[5rem]  h-[5rem] border-2 border-orange-500"></div>
+                    <h1>Design & Developement</h1>
+                    <h3>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo.</h3>
+                </div>
+
+                <div
+                    class="flex bg-gray-100 myshadow   justify-center items-center text-center w-[20rem] h-[20rem]  flex-col gap-4 p-4">
+                    <div class="flex w-[5rem]  h-[5rem] border-2 border-orange-500"></div>
+                    <h1>Analiysing & Design</h1>
+                    <h3>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo.</h3>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
