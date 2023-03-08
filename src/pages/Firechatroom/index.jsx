@@ -78,7 +78,7 @@ const FireChatRoom = () => {
                       } p-1`}
                     >
                       <p className="text-xs bg-teal-100 p-1 pl-2 pr-2 rounded-3xl font-medium">
-                        {createdAt.seconds}
+                        {text}
                         <p>
                           {" "}
                           
