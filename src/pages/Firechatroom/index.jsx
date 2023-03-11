@@ -18,7 +18,7 @@ const FireChatRoom = () => {
   const getMessages = async () => {
     const messages = await getDocs(
       collection(firebase.db, "messages"),
-      orderBy("createdAt")
+      orderBy("createdAt",'asc')
     );
     // const allMsgs = await useCollection()
     // setMessages([messages]);
@@ -58,7 +58,8 @@ const FireChatRoom = () => {
   return (
     <>
       <div className="flex bg-white fixed  justify-center items-center  w-screen h-screen">
-        <div className="flex relative sm:bg-teal-300 mbp z-20  justify-center pb-20  w-screen sm:w-[305px] sm:border-[10px] border-black sm:h-[90%] h-screen rounded-3xl overflow-hidden ">
+        <div className="w-1/2 h-full"></div>
+        <div className="flex relative sm:bg-teal-300 mbp z-20  justify-center pb-20  w-1/2 sm:w-[305px] sm:border-[10px] border-black sm:h-[600px] h-screen rounded-3xl overflow-hidden ">
           <span className="flex justify-start gap-3 pl-1 items-center absolute sm:w-[110px] sm:h-6 rounded-full top-2 bg-black">
             <span className="block rounded-full sm:w-[18px] sm:h-[18px] bg-slate-900"></span>
             <span className="block rounded-full sm:w-[62px] sm:h-[5px] bg-slate-700"></span>
@@ -71,20 +72,19 @@ const FireChatRoom = () => {
                 const { uid, createdAt, photoURL, text } = msg.data();
                 return (
                   <>
-                    <div
+                    <div      
                       key={msg.id}
                       className={`msg w-full flex  gap-1   ${
                         uid === firebase.Uid ? "sent" : "recieve"
                       } p-1`}
                     >
                       <p className="text-xs bg-teal-100 p-1 pl-2 pr-2 rounded-3xl font-medium">
-                        {createdAt.seconds}
+                        {text}
                         <p>
-                          {" "}
-                          
-                          <Moment fromNow ago >
+                          {/* {" "}
+                          <Moment toNow >
                           {createdAt.seconds}
-                          </Moment>
+                          </Moment> */}
                         </p>
                         {/* <p>{createdAt.seconds.toTimeString()}</p> */}
                       </p>
@@ -101,7 +101,7 @@ const FireChatRoom = () => {
               })}
           </div>
 
-          <div className="flex absolute p-3 justify-center items-center  w-full bottom-2">
+          <div className="flex absolute p-3  justify-center items-center backdrop-blur-3xl  w-full bottom-2">
             {/* Its Sticky Bottom Msg Keyboard */}
             <div className="flex justify-center items-center relative w-full">
               <textarea
@@ -110,17 +110,17 @@ const FireChatRoom = () => {
                 onChange={(e) => setText(e.target.value)}
                 className="w-[95%] h-10 shadow-xl font-medium  pt-2 pb-3 rounded-full pl-5 focus:outline-none bs pr-10 overflow-hidden"
               />
-              {text ? (
+              {/* {!text ? ( */}
                 <button
                   onClick={sendMsg}
                   onKeyDown={sendMsgOnEnter}
-                  className="p-2 rounded-full m-auto top-1 right-3  w-[35px] h-[35px] absolute overflow-hidden bs font-bold bg-teal-700 flex justify-center items-center shadow-2xl"
+                  className="p-2 rounded-full m-auto top-1 right-3 z-50  w-[35px] h-[35px] absolute overflow-hidden bs font-bold bg--700 flex justify-center items-center shadow-2xl"
                 >
                   <IoSend className="text-white" />
                 </button>
-              ) : (
+              {/* ) : (
                 ""
-              )}
+              )} */}
             </div>
           </div>
         </div>
