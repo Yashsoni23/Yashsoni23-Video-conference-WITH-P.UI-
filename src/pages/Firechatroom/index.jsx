@@ -52,8 +52,6 @@ const FireChatRoom = () => {
     setText("");
   }
  
-  // ;const today  = new Date(1677954971)
-  // console.log(today);
 
   return (
     <>
