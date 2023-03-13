@@ -119,7 +119,7 @@ textarea{
   border-radius: 60px;
 }
 .chatbg{
-  background: url("./Assets/chatbg.png");
+  background: url("./Assets/chatbg.webp");
   background-size: cover;
 }
 /* .photo{
