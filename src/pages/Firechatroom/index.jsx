@@ -23,6 +23,7 @@ const FireChatRoom = () => {
     // const allMsgs = await useCollection()
     // setMessages([messages]);
     Messages.forEach((msg) => {
+      // console.log(msg.data().createdAt);
       setMessageData(msg.data());
     });
     //  ((msg) => {
@@ -32,6 +33,7 @@ const FireChatRoom = () => {
         // <Message text={msg.data(z).text}/>
     // });
     setMessages(messages.docs.sort());
+    // console.log(Messages[0].data().createdAt);
     // console.log(msgData);
   };
   useEffect(() => {
@@ -55,8 +57,8 @@ const FireChatRoom = () => {
 
   return (
     <>
-      <div className="flex bg-white fixed  justify-center items-center  w-screen h-screen">
-        <div className="hidden sm:flex w-1/2 h-full"></div>
+      <div className="flex bg-white fixed gap-20  justify-center items-center  w-screen h-screen">
+        <div className="hidden sm:flex w-1/2 chatbggif h-4/5"></div>
         <div className="flex relative chatbg sm:bg-teal-300 mbp z-20  justify-center pb-20  w-full sm:w-[305px] sm:border-[10px] border-black sm:h-[600px] h-screen rounded-3xl overflow-hidden ">
           <span className="flex justify-start gap-3 pl-1 items-center absolute sm:w-[110px] sm:h-6 rounded-full top-2 bg-black">
             <span className="block rounded-full sm:w-[18px] sm:h-[18px] bg-slate-900"></span>
@@ -76,11 +78,11 @@ const FireChatRoom = () => {
                         uid === firebase.Uid ? "sent" : "recieve"
                       } p-1`}
                     >
-                      <p className="text-xs bg-teal-100 p-1 pl-2 pr-2 rounded-3xl font-medium">
+                      <p className="recieve-bg text-xs bg-teal-100 p-1 pl-2 pr-2 rounded-3xl font-medium">
                         {text}
                         <p>
                           {" "}
-                          <Moment toNow >
+                          <Moment format="hh:mm" className="text-[8px]">
                           {createdAt}
                           </Moment>
                         </p>

@@ -78,6 +78,10 @@ textarea{
   /* background: #000; */
   flex-direction: row-reverse;
 }
+.recieve .recieve-bg{
+  background: #0353ff;
+  color: white;
+}
 @keyframes out {
   0%{
     transform: rotate(0deg);
@@ -121,6 +125,11 @@ textarea{
 .chatbg{
   background: url("./Assets/chatbg.webp");
   background-size: cover;
+}
+.chatbggif{
+  background: url("./Assets/5\ .gif");
+  background-size: cover;
+
 }
 /* .photo{
   background: url("./Assets/user.png");
