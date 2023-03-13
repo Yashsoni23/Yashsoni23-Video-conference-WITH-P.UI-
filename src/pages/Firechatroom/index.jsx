@@ -18,27 +18,29 @@ const FireChatRoom = () => {
   const getMessages = async () => {
     const messages = await getDocs(
       collection(firebase.db, "messages"),
-      orderBy("createdAt")
+      orderBy("createdAt",'asc')
     );
     // const allMsgs = await useCollection()
     // setMessages([messages]);
     Messages.forEach((msg) => {
+      // console.log(msg.data().createdAt);
       setMessageData(msg.data());
     });
     //  ((msg) => {
-    //   // setMessages([..,msg.data()])
-    //   setMessages([msg.data()]);
-    //   //   console.log(msg.data().text);
-    //   //   <Message text={msg.data(z).text}/>
+      // setMessages([..,msg.data()])
+      // setMessages([msg.data()]);
+      //   console.log(msg.data().text);
+        // <Message text={msg.data(z).text}/>
     // });
     setMessages(messages.docs.sort());
+    // console.log(Messages[0].data().createdAt);
     // console.log(msgData);
   };
   useEffect(() => {
     getMessages();
   }, []);
   const time =Date.now();
-   const sendMsgOnEnter = (e)=>(e.keycode===13?sendMsg:"")
+   const sendMsgOnEnter = (e)=>(e.keycode===13?sendMsg():"")
   
   const sendMsg = (e) => {
     e.preventDefault();
@@ -52,13 +54,12 @@ const FireChatRoom = () => {
     setText("");
   }
  
-  // ;const today  = new Date(1677954971)
-  // console.log(today);
 
   return (
     <>
-      <div className="flex bg-white fixed  justify-center items-center  w-screen h-screen">
-        <div className="flex relative sm:bg-teal-300 mbp z-20  justify-center pb-20  w-screen sm:w-[305px] sm:border-[10px] border-black sm:h-[90%] h-screen rounded-3xl overflow-hidden ">
+      <div className="flex bg-white fixed gap-20  justify-center items-center  w-screen h-screen">
+        <div className="hidden sm:flex w-1/2 chatbggif h-4/5"></div>
+        <div className="flex relative chatbg sm:bg-teal-300 mbp z-20  justify-center pb-20  w-full sm:w-[305px] sm:border-[10px] border-black sm:h-[600px] h-screen rounded-3xl overflow-hidden ">
           <span className="flex justify-start gap-3 pl-1 items-center absolute sm:w-[110px] sm:h-6 rounded-full top-2 bg-black">
             <span className="block rounded-full sm:w-[18px] sm:h-[18px] bg-slate-900"></span>
             <span className="block rounded-full sm:w-[62px] sm:h-[5px] bg-slate-700"></span>
@@ -71,26 +72,28 @@ const FireChatRoom = () => {
                 const { uid, createdAt, photoURL, text } = msg.data();
                 return (
                   <>
-                    <div
+                    <div      
                       key={msg.id}
                       className={`msg w-full flex  gap-1   ${
                         uid === firebase.Uid ? "sent" : "recieve"
                       } p-1`}
                     >
-                      <p className="text-xs bg-teal-100 p-1 pl-2 pr-2 rounded-3xl font-medium">
+
+                      <p className="recieve-bg text-xs bg-teal-100 p-1 pl-2 pr-2 rounded-3xl font-medium">
+
+                 
+
                         {text}
                         <p>
                           {" "}
-                          
-                          <Moment fromNow ago >
-                          {createdAt.seconds}
+                          <Moment format="hh:mm" className="text-[8px]">
+                          {createdAt}
                           </Moment>
                         </p>
-                        {/* <p>{createdAt.seconds.toTimeString()}</p> */}
                       </p>
                       <div className="photo w-[27px] h-[27px] overflow-hidden shadow-2xl rounded-full bg-teal-600">
                         <img
-                          src={photoURL ? photoURL : "user.png"}
+                          src="/user.png"
                           alt=""
                           className="w-full h-full"
                         />
@@ -101,7 +104,7 @@ const FireChatRoom = () => {
               })}
           </div>
 
-          <div className="flex absolute p-3 justify-center items-center  w-full bottom-2">
+          <div className="flex absolute p-3  justify-center items-center backdrop-blur-3xl  w-full bottom-2">
             {/* Its Sticky Bottom Msg Keyboard */}
             <div className="flex justify-center items-center relative w-full">
               <textarea
@@ -112,15 +115,15 @@ const FireChatRoom = () => {
               />
               {text ? (
                 <button
-                  onClick={sendMsg}
-                  onKeyDown={sendMsgOnEnter}
-                  className="p-2 rounded-full m-auto top-1 right-3  w-[35px] h-[35px] absolute overflow-hidden bs font-bold bg-teal-700 flex justify-center items-center shadow-2xl"
+                 
+                  className=" rounded-full m-auto top-1 right-3 z-50  w-[35px] h-[35px] absolute overflow-hidden bs font-bold bg-teal-700 flex justify-center items-center shadow-2xl"
                 >
-                  <IoSend className="text-white" />
-                </button>
-              ) : (
+                  <IoSend className="text-white" onClick={sendMsg}
+                  onKeyDown={sendMsgOnEnter}/>
+                </button>)
+               : 
                 ""
-              )}
+              }
             </div>
           </div>
         </div>
