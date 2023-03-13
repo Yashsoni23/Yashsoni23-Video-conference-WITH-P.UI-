@@ -78,7 +78,11 @@ const FireChatRoom = () => {
                         uid === firebase.Uid ? "sent" : "recieve"
                       } p-1`}
                     >
+
                       <p className="recieve-bg text-xs bg-teal-100 p-1 pl-2 pr-2 rounded-3xl font-medium">
+
+                 
+
                         {text}
                         <p>
                           {" "}
