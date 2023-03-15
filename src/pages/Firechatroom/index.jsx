@@ -89,7 +89,7 @@ const FireChatRoom = () => {
                       </p>
                       <div className="photo w-[27px] h-[27px] overflow-hidden shadow-2xl rounded-full bg-teal-600">
                         <img
-                          src="/user.png"
+                          src={!photoURL?"/user.png":photoURL}
                           alt=""
                           className="w-full h-full"
                         />

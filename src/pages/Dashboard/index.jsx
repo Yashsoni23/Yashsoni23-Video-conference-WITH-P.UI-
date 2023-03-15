@@ -20,23 +20,11 @@ const Dashboard = () => {
     },
     [navigate]
   );
-  const isValid = () =>{
-    if(!room || room===null || room===String){
-      // setErrorMsg("Room number Can't be empty !!!")
-      return false;
-    }else if(room===0 ||room<0|| room<100){
-      return false;
-    }else if(room<1000 && room>99){
-      return true;
-    }
-  }
-  const isvalid = isValid();
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(isvalid){
       navigate(`/Conference/${room}`);
-    }
   };
   return (
     <>
@@ -72,9 +60,7 @@ const Dashboard = () => {
                   required
                 />
               </div>
-              {errorMsg?<div className="error bg-white font-bold border-4 p-2 w-full border-red-600 text-red-600 ">
-              {errorMsg}
-              </div>:""}
+              
 
               <button
                 type="submit"
