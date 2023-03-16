@@ -131,6 +131,15 @@ textarea{
   background-size: cover;
 
 }
+
+.closeSidebar{
+  animation: close 1s   linear ;
+}
+@keyframes close {
+  0%{
+    height: 0;
+  }
+}
 /* .photo{
   background: url("./Assets/user.png");
 } */
