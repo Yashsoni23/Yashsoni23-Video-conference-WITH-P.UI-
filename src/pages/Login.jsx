@@ -10,7 +10,7 @@ const Login = () => {
 
   useEffect(() => {
     if (firebase.isLoggedIn) {
-      navigate("/dashboard");
+      navigate("/Dashboard");
     }
   }, [firebase, navigate]);
 
