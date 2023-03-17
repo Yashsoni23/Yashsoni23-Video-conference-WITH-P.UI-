@@ -20,16 +20,15 @@ const FireChatRoom = () => {
     const messages = await getDocs(
      collection(firebase.db,"messages")
     );
-    const data  = collection(firebase.db,"messages").orderBy("createdAt", "asc");
-    console.log(data);
+    const messagesRef  = collection(firebase.db,"messages")
+  //  const data  =  useCollection("messages").query(orderBy("createdAt", "asc"));
+    // console.log(data);
    
 
     Messages.forEach((msg) => {
       
       setMessageData(msg.data());
     // console.log(msgData.sort(msg.data().createdAt));
-      const date = new Date(msg.data().createdAt);
-      console.log(date.sort());
     });
     
     setMessages(messages.docs.sort());
