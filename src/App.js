@@ -12,7 +12,7 @@ function App() {
 
       <Route path='/Dashboard' element={<Dashboard/>}/>
       <Route path='/' element={<Home/>}/>
-      <Route path='/firechat' element={<FireChatRoom/>}/>
+      <Route path='/Chat' element={<FireChatRoom/>}/>
       <Route path='/Conference/:roomid' element={<RoomPage/>}/>
       <Route path='/chat/:roomid' element={<Chatroom/>}/>
      </Routes>
