@@ -108,7 +108,7 @@ export const FirebaseProvider = (props) => {
 
       const docRef = await addDoc(collection(db, "messages"), {
         text: text,
-        createdAt: time,
+        createdAt: Timestamp(),
         uid,
         photoURL,
       });
