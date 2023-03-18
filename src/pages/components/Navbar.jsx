@@ -67,8 +67,8 @@ const Navbar = () => {
           </button>
         </ul>
       </nav>
-      <nav className="absolute z-50 sm:hidden top-0 flex flex-col w-full justify-center items-center h-max">
-        <h1 className="bg-teal-500 backdrop-blur-3xl text-white text-2xl font-bold w-full p-3 flex justify-between shadow-2xl">VideoChat Web 
+      <nav className="fixed z-50 top-0 sm:hidden  flex flex-col w-full justify-center items-center h-max">
+        <h1 className="bg-teal-500 backdrop-blur-3xl  text-white text-2xl font-bold w-full p-3 flex justify-between shadow-2xl">VideoChat Web 
         {
         ShowSidebar
         ?
@@ -80,7 +80,9 @@ const Navbar = () => {
          
          
          </h1>
-        <ul ref={sidebar} className="flex closeSidebar p-20 flex-col sm:gap-5 gap-2 mt-[-28em] bg-teal-200 font-bold w-full justify-center items-center text-black">
+      </nav>
+
+        <ul ref={sidebar} className="flex absolute z-10  showSidebar p-20 flex-col sm:gap-5 gap-2 bg-teal-200 font-bold w-full justify-center items-center text-black">
           <Link to={"/Dashboard"}
             className={`p-2 cursor-pointer zoom transition-all duration-300 hover:text-orange-600  sm:text-2xl text-xl li ${
               activeCondition_1 ? "active" : ""
@@ -116,7 +118,6 @@ const Navbar = () => {
             Logout
           </button>
         </ul>
-      </nav>
     </>
   );
 };
