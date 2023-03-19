@@ -1,15 +1,46 @@
-import React from "react";
+import React, { useRef ,useEffect} from "react";
+import { useFirebase } from "../context/firebase";
+import Moment from "react-moment";
 
-const Message = (text) => {
-    // console.log(text);
+const Message = (msg) => {
+  const dummy = useRef()
+  useEffect(() => {
+    dummy.current.scrollIntoView({ behavior: 'smooth' });
+
+  }, [msg])
+  
+  const firebase =useFirebase();
+  const { uid, createdAt, photoURL, text } = msg.message;
+
   return (
     <>
-      <div className="msg flex justify-center gap-1 flex-row-reverse items-center recieve p-1">
-        <p className="text-xs bg-teal-100 p-1 pl-2 pr-2 rounded-3xl font-medium">
+      <div
+        key={msg.id}
+        className={`msg w-full flex  gap-1   ${
+          uid === firebase.Uid ? "sent" : "recieve"
+        } p-1`}
+      >
+        <p
+          key={msg.id}
+          className="recieve-bg text-xs bg-teal-100 p-1 pl-2 pr-2 rounded-md font-medium"
+        >
           {text}
+          <p>
+            {" "}
+            <Moment fromNow className="text-[8px]">
+              {createdAt}
+            </Moment>
+          </p>
         </p>
-        <div className="photo w-[27px] h-[27px]  shadow-2xl rounded-full bg-teal-600"></div>
+        <div className="photo w-[27px] h-[27px] overflow-hidden shadow-2xl rounded-full bg-teal-600">
+          <img
+            src={!photoURL ? "/user.png" : photoURL}
+            alt=""
+            className="w-full h-full"
+          />
+        </div>
       </div>
+      <span ref={dummy} ></span>
     </>
   );
 };
