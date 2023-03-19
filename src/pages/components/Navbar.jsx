@@ -11,11 +11,11 @@ const Navbar = () => {
   const sidebar = useRef();
   const [ShowSidebar,setShowSidebar] = useState(false);
   const pathname = window.location.pathname.split("/").join("");
-  const navElements = ["Dashboard","Chat", "About", "Contact"];
+  const navElements = ["Dashboard","Chat", "About", "FAQ"];
   const activeCondition_1 = navElements[0] === pathname;
   const activeCondition_2 = navElements[1] === pathname;
   const activeCondition_3 = navElements[2] === pathname;
-  const activeCondition_4 = navElements[2] === pathname;
+  const activeCondition_4 = navElements[3] === pathname;
 
   const showSideBarFun = ()=>{
     setShowSidebar(!ShowSidebar)
@@ -29,7 +29,7 @@ const Navbar = () => {
     navigate("/")};
   return (
     <>
-      <nav className="hidden absolute  top-10 sm:flex flex-col w-full justify-center items-center h-max">
+      <nav className="hidden absolute  top-0 p-5 sm:flex flex-col w-full justify-center items-center h-max">
         <ul className="flex sm:gap-5 gap-2 font-bold w-full justify-center items-center text-black">
           <Link to={"/Dashboard"}
             className={`p-2 cursor-pointer transition-all duration-300 hover:text-orange-600  sm:text-2xl text-xl li ${
@@ -52,7 +52,7 @@ const Navbar = () => {
           >
             {navElements[2]}
           </Link>
-          <Link to={"/Contact"}
+          <Link to={"/FAQ"}
             className={`p-2 cursor-pointer transition-all duration-300 hover:text-orange-600  sm:text-2xl text-xl li  ${
               activeCondition_4 ? "active" : ""
             }`}
@@ -82,7 +82,7 @@ const Navbar = () => {
          </h1>
       </nav>
 
-        <ul ref={sidebar} className="flex absolute z-10  showSidebar p-20 flex-col sm:gap-5 gap-2 bg-teal-200 font-bold w-full justify-center items-center text-black">
+        <ul ref={sidebar} className="flex sm:hidden fixed z-40 sb  showSidebar p-20 flex-col sm:gap-5 gap-2 bg-teal-200 font-bold w-full justify-center items-center text-black">
           <Link to={"/Dashboard"}
             className={`p-2 cursor-pointer zoom transition-all duration-300 hover:text-orange-600  sm:text-2xl text-xl li ${
               activeCondition_1 ? "active" : ""
@@ -104,7 +104,7 @@ const Navbar = () => {
           >
             {navElements[2]}
           </Link>
-          <Link to={"/Contact"}
+          <Link to={"/FAQ"}
             className={`p-2 cursor-pointer zoom transition-all duration-300 hover:text-orange-600  sm:text-2xl text-xl li  ${
               activeCondition_4 ? "active" : ""
             }`}

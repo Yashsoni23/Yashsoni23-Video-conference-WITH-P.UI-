@@ -145,6 +145,7 @@ textarea{
   animation: open 1s   linear ;
   animation-iteration-count: initial;
   transition: all .5s linear;
+  display: none;
 }
 .showSidebar .zoom{
   transition: all .5s linear;
@@ -196,6 +197,75 @@ textarea{
   100%{
     transform: scale(1);
   }
+}
+.infa-move{
+  animation: move 1.3s   infinite  linear;
+}
+@keyframes move {
+  0%{
+    transform:  translateX(0%);
+  }
+  50%{
+    transform:  translateX(10%);
+  }
+  100%{
+    transform:  translateX(0%);
+  }
+}
+.faq{
+  position: relative;
+  /* height: 10rem; */
+  max-height: max-content;
+
+  transition: all 1s linear;
+  animation: expend 1s  linear;
+  animation-iteration-count: initial;
+}
+.default-height{
+  height: 3.5rem;
+  border-bottom: 1px solid #ffffff65;
+  animation: expendreverse 1s  linear;
+}
+@keyframes expend {
+  0%{
+    height: 3.5rem;
+  }50%{
+    height: calc(120%-50%);
+  }100%{
+    max-height: max-content;
+  }
+}
+.faq .a .b .btn{
+  transform: rotate(180deg);
+}
+.default-height .a .b .btn{
+  transform: rotate(0);
+}
+.faq .a .b {
+  background-color: #b855ff;
+}
+.default-height .a .b {
+  /* background-color: initial; */
+}
+
+
+
+@keyframes expendreverse {
+  0%{
+    max-height: max-content;
+  }50%{
+    height: calc(120%-50%);
+  }100%{
+    height: 3.5rem;
+
+  }
+}
+.ts{
+  text-shadow: 0 0 10px #000000cc;
+}
+.sb{
+  box-shadow: 0 0 90px 4px #07e2e2;
+  border-bottom: 2px solid #00757538;
 }
 /* .photo{
   background: url("./Assets/user.png");
