@@ -94,7 +94,14 @@ textarea{
 
   }
 }
-
+#roomno::-webkit-scrollbar{
+  display: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .bg-black-opa{
   /* background: #000000be; */
   background: radial-gradient(#000000d0,#020202c8);

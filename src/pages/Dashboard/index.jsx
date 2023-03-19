@@ -6,7 +6,7 @@ import { useFirebase } from "../context/firebase";
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("Room number Can't be empty");
-  const [room, setRoom] = useState("");
+  const [room, setRoom] = useState();
   const firebase = useFirebase();
   const navigate = useNavigate();
   useEffect(
@@ -16,19 +16,26 @@ const Dashboard = () => {
         navigate("/");
       }
       setIsLoading(false);
-
     },
     [navigate]
   );
- 
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (room.length < 3) {
+      if (window.confirm(" Please Enter room value > 2 integer!!!")) {
+        return false;
+      }
+     
+    }
+    else if (window.confirm(` Are sure you want to go in room no ${room}!`)) {
       navigate(`/Conference/${room}`);
+    }
   };
   return (
     <>
-        {isLoading ? <Loading /> : ""}
+      {isLoading ? <Loading /> : ""}
 
       <div className="flex relative overflow-hidden bg-white sm:flex-row flex-col justify-center items-center w-screen gap-4 h-screen">
         <Navbar />
@@ -50,9 +57,12 @@ const Dashboard = () => {
                   Room No:
                 </label>
                 <input
-                  type="text"
+                  type="Number"
                   name="roomno"
-                  id=" "
+                  id=" roomno"
+                  autoCorrect={false}
+                  autoComplete={false}
+                  onScroll={false}
                   className="font-bold placeholder:text-center text-xl text-white text-center bg-teal-800 placeholder:text-white p-3 rounded-3xl focus:outline-none focus:border-b-4 pl-4 focus:border-amber-500"
                   placeholder="Enter Room No..."
                   value={room}
@@ -60,7 +70,6 @@ const Dashboard = () => {
                   required
                 />
               </div>
-              
 
               <button
                 type="submit"
