@@ -17,7 +17,7 @@ const Login = () => {
   return (
     <>
 
-      <div className="flex sm:flex-row gap-10 pt-32 sm:pt-0 bg-white  flex-col-reverse w-screen h-screen justify-center items-center">
+      <div className="flex sm:flex-row gap-10 pt-32 sm:pt-0 bg-white  flex-col-reverse w-screen sm:h-screen h-max justify-center items-center">
       <div className="flex">
         <div className="flex sm:w-[640px] w-[320px]  sm:h-[640px] h-[320px]  bg-laptop "></div>
 

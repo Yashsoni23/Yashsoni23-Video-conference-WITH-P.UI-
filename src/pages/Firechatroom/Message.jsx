@@ -27,7 +27,7 @@ const Message = (msg) => {
           {text}
           <p>
             {" "}
-            <Moment fromNow className="text-[8px]">
+            <Moment fromNow className="text-[8px] text-left">
               {createdAt}
             </Moment>
           </p>

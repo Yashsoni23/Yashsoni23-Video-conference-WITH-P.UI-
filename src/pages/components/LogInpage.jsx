@@ -37,7 +37,7 @@ const LogIn = () => {
     .then((result) => {
       toastSuccess();
       navigate("/Dashboard");
-      console.log(firebase.isLoggedIn);
+      // console.log(firebase.isLoggedIn);
     setIsLoading(false)
 
     })

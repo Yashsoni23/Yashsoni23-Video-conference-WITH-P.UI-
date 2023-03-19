@@ -37,7 +37,7 @@ const SignUp = () => {
           .then((data) => {
             toastSuccess();
             setIsLoading(false);
-            console.log(data);
+            // console.log(data);
           })
           .catch((error) => {
             toast(`error ${error}`);

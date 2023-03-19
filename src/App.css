@@ -70,12 +70,15 @@ textarea{
   clear: both;
   flex-direction: row;
   justify-content: flex-end;
+  text-align: right;
 }
 .recieve{
   float: left;
   clear: both;
   justify-content: flex-end;
   /* background: #000; */
+  text-align: left;
+
   flex-direction: row-reverse;
 }
 .recieve .recieve-bg{
