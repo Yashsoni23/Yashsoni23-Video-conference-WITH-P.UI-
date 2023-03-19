@@ -112,7 +112,7 @@ export const FirebaseProvider = (props) => {
         uid,
         photoURL,
       });
-      console.log("Document written with ID: ", docRef.id);
+      // console.log("Document written with ID: ", docRef.id);
     } catch (error) {
       console.log(error);
     }

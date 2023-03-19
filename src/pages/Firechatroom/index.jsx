@@ -15,7 +15,6 @@ const FireChatRoom = () => {
   const ref = collection(firebase.db, "messages");
   const Query = query(ref, orderBy("createdAt"));
   const [data] = useCollectionData(Query);
-  console.log(data);
   useEffect(() => {
     dummy.current.scrollIntoView({ behavior: "smooth" });
   }, []);

@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import ProfileCard from './ProfileCard'
 import ProjectHeadData from "./ProjectData"
 const About = () => {
-console.log(ProjectHeadData[0]);
+// console.log(ProjectHeadData[0]);
    
 
   return (
