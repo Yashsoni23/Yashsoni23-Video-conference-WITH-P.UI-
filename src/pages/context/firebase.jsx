@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { getMessaging ,getToken, onMessage} from "firebase/messaging";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -28,6 +29,7 @@ import {
 const FirebaseContext = createContext(null);
 
 const provider = new GoogleAuthProvider();
+
 const firebaseConfig = {
   apiKey: "AIzaSyChBqVPNvHMmKcVQSq0QCM-2B7zif4YNho",
   authDomain: "videoconferenceweb.firebaseapp.com",
@@ -43,6 +45,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 const db = getFirestore(app);
+const messaging = getMessaging(app);
+
 export const useFirebase = () => useContext(FirebaseContext);
 
 export const FirebaseProvider = (props) => {
@@ -129,6 +133,7 @@ export const FirebaseProvider = (props) => {
           userDetail,
           userName,
           isLoggedIn,
+          messaging,
           signInWIthGoogle,
           sendMessage,
           db,
@@ -141,3 +146,10 @@ export const FirebaseProvider = (props) => {
     </>
   );
 };
+
+export const onMessageListener = () =>
+  new Promise((resolve) => {    
+    onMessage(messaging, (payload) => {
+      resolve(payload);
+    });
+  });
