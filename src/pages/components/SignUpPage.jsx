@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "./Loading";
 
-
 const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState();
