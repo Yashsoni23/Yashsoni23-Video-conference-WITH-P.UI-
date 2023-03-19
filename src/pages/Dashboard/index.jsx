@@ -1,42 +1,21 @@
-import { getToken, onMessage } from "firebase/messaging";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 import Navbar from "../components/Navbar";
-import { useFirebase ,onMessageListener} from "../context/firebase";
+import { useFirebase } from "../context/firebase";
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("Room number Can't be empty");
   const [room, setRoom] = useState();
   const firebase = useFirebase();
   const navigate = useNavigate();
-
-
-  function requestPermission() {
-    console.log("Requesting permission...");
-
-    Notification.requestPermission().then(async(permission) => {
-      if (permission === "granted") {
-        console.log("Notification permission granted.");
-       const token = await getToken(firebase.messaging,{vapidKey:"BPWusCnUogUAxi1HRUge_zk3uCq34Uyr8K6Qcv2eNODKhL6c7Bin_sx7L68ene2jT7PvYHpDgohrKh9j02PD8Yo"});
-       console.log("Token:",token);
-       onMessage(firebase.messaging,(payload)=>{
-        console.log(payload);
-       })
-
-      }
-    });
-  }
-  
   useEffect(
     (e) => {
       setIsLoading(true);
       if (!firebase.isLoggedIn) {
         navigate("/");
       }
-      requestPermission();
       setIsLoading(false);
-      onMessageListener().then((p)=>console.log(p))
     },
     [navigate]
   );
@@ -48,7 +27,9 @@ const Dashboard = () => {
       if (window.confirm(" Please Enter room value > 2 integer!!!")) {
         return false;
       }
-    } else if (window.confirm(` Are sure you want to go in room no ${room}!`)) {
+     
+    }
+    else if (window.confirm(` Are sure you want to go in room no ${room}!`)) {
       navigate(`/Conference/${room}`);
     }
   };
