@@ -129,9 +129,7 @@ input::-webkit-inner-spin-button {
 .gl{
   box-shadow: 0 0 7px #0000004a;
 }
-.mbp{
-  border-radius: 60px;
-}
+
 .chatbg{
   background: url("./Assets/chatbg.webp");
   background-size: cover;
