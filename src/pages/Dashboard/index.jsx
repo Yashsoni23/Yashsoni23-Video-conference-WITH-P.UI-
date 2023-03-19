@@ -30,7 +30,7 @@ const Dashboard = () => {
     <>
         {isLoading ? <Loading /> : ""}
 
-      <div className="flex bg-white sm:flex-row flex-col justify-center items-center w-screen gap-4 h-screen">
+      <div className="flex relative overflow-hidden bg-white sm:flex-row flex-col justify-center items-center w-screen gap-4 h-screen">
         <Navbar />
         <div className="flex bg-mobile  sm:w-1/2 w-[320px] h-[320px] bg-center sm:h-full  "></div>
 
