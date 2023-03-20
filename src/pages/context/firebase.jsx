@@ -1,7 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 import {
   collection,
   addDoc,
@@ -21,6 +18,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
@@ -50,13 +48,12 @@ export const FirebaseProvider = (props) => {
   const [userName, setUserName] = useState(null);
   const [Uid, setUid] = useState();
   const [userDetail, setUserDetail] = useState();
-  
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        // console.log(user.uid);
+        console.log(user.email);
         setUid(user.uid);
         setUserName(user.displayName);
         get(child(ref(database), `users/` + user.displayName))
@@ -78,7 +75,11 @@ export const FirebaseProvider = (props) => {
   const signIn = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password);
   };
-
+  const resetPassword = async (email) => {
+    return await sendPasswordResetEmail(auth, email)
+      .then((p) => console.log("pw reset email sented", p))
+      .catch((err) => console.log(err));
+  };
   const UserDetails = async (FirstName, LastName, email, password) => {
     return set(ref(database, "users/" + FirstName), {
       FirstName,
@@ -108,7 +109,7 @@ export const FirebaseProvider = (props) => {
 
       const docRef = await addDoc(collection(db, "messages"), {
         text: text,
-        createdAt:  time,
+        createdAt: time,
         uid,
         photoURL,
       });
@@ -130,10 +131,10 @@ export const FirebaseProvider = (props) => {
           userName,
           isLoggedIn,
           signInWIthGoogle,
+          resetPassword,
           sendMessage,
           db,
-          Uid
-          
+          Uid,
         }}
       >
         {props.children}

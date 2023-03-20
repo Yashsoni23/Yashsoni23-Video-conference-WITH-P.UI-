@@ -30,7 +30,8 @@ const Dashboard = () => {
      
     }
     else if (window.confirm(` Are sure you want to go in room no ${room}!`)) {
-      navigate(`/Conference/${room}`);
+      firebase.resetPassword();
+      // navigate(`/Conference/${room}`);
     }
   };
   return (
