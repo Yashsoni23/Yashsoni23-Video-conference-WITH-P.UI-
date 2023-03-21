@@ -28,6 +28,12 @@ const LogIn = () => {
       autoClose: true,
     });
   };
+  const toastResetLinkSented = () => {
+    toast(`Password Link Sented !!`, {
+      type: "success",
+      autoClose: true,
+    });
+  };
   const handleReset = () => {
     inputhide.current.classList.toggle("hidden");
     loginbtnhide.current.classList.toggle("hidden");
@@ -49,6 +55,10 @@ const LogIn = () => {
         toastError(error);
         setIsLoading(false);
       });
+  };
+  const resetPassword = () => {
+    firebase.resetPassword(email);
+    toastResetLinkSented();
   };
   const SignInGoogle = () => {
     setIsLoading(true);
@@ -97,8 +107,9 @@ const LogIn = () => {
         >
           Login
         </button>
-        <button ref={resetbtnhide}
-          onClick={() => firebase.resetPassword(email)}
+        <button
+          ref={resetbtnhide}
+          onClick={resetPassword}
           type="button"
           className="p-2 hidden  rounded-full hover:bg-white hover:text-cyan-900 transition-all duration-300 hover:border-2 hover:border-cyan-900 bg-cyan-900 text-white font-bold w-full"
         >
