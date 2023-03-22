@@ -5,7 +5,6 @@ import Navbar from "../components/Navbar";
 import { useFirebase } from "../context/firebase";
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("Room number Can't be empty");
   const [room, setRoom] = useState();
   const firebase = useFirebase();
   const navigate = useNavigate();
@@ -30,8 +29,7 @@ const Dashboard = () => {
      
     }
     else if (window.confirm(` Are sure you want to go in room no ${room}!`)) {
-      firebase.resetPassword();
-      // navigate(`/Conference/${room}`);
+      navigate(`/Conference/${room}`);
     }
   };
   return (
