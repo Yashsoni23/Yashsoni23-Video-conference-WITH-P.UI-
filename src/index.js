@@ -5,14 +5,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { FirebaseProvider } from "./pages/context/firebase"
+import { SocketProvider } from './pages/context/socket';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <FirebaseProvider>
+      <SocketProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
+      </SocketProvider>
     </FirebaseProvider>
   </React.StrictMode>
 );

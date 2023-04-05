@@ -2,6 +2,7 @@ import './App.css';
 import {Routes,Route} from "react-router-dom"
 import Home from './pages/Login';
 import RoomPage from './pages/Conference';
+import Meetlive from './pages/Meetlive';
 import Chatroom from './pages/Chats';
 import Dashboard from "./pages/Dashboard"
 import FireChatRoom from './pages/Firechatroom';
@@ -18,6 +19,7 @@ function App() {
       <Route path='/Chat' element={<FireChatRoom/>}/>
       <Route path='/FAQ' element={<FAQ/>}/>
       <Route path='/Conference/:roomid' element={<RoomPage/>}/>
+      <Route path='/Meetlive/:roomid' element={<Meetlive/>}/>
       <Route path='/chat/:roomid' element={<Chatroom/>}/>
      </Routes>
     </div>

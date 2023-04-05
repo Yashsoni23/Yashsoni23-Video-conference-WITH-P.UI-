@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { getAuth } from "firebase/auth";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 import Navbar from "../components/Navbar";
 import { useFirebase } from "../context/firebase";
+import { useSocket } from "../context/socket";
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [room, setRoom] = useState();
   const firebase = useFirebase();
+  const socket = useSocket();
   const navigate = useNavigate();
+  const auth = getAuth();
+
   useEffect(
     (e) => {
       setIsLoading(true);
@@ -19,19 +24,43 @@ const Dashboard = () => {
     [navigate]
   );
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      const userEmail = auth.currentUser.email;
+      socket.emit("room:join", { userEmail, room });
+    },
+    [socket, room]
+  );
+  const handleJoinRoom = useCallback(
+    (data) => {
+    const { userEmail, room } = data;
+        navigate(`/Meetlive/${room}`,{state:{room,userEmail}});
+  }, [navigate]);
 
-    if (room.length < 3) {
-      if (window.confirm(" Please Enter room value > 2 integer!!!")) {
-        return false;
-      }
-     
-    }
-    else if (window.confirm(` Are sure you want to go in room no ${room}!`)) {
-      navigate(`/Conference/${room}`);
-    }
-  };
+  useEffect(() => {
+    socket.on("room:join", handleJoinRoom);
+    return () => {
+      socket.off("room:join", handleJoinRoom);
+    };
+  }, [socket, handleJoinRoom]);
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   // if (room.length < 3) {
+  //   //   if (window.confirm(" Please Enter room value > 2 integer!!!")) {
+  //   //     return false;
+  //   //   }
+
+  //   // }
+  //   // else if (window.confirm(` Are sure you want to go in room no ${room}!`)) {
+  //   //   useCallback((e)=>{
+  //   //   e.preventDefault();
+  //   //   console.log(firebase.userDetail);
+  //   // },[room,socket])
+  //   navigate(`/Meetlive/${room}`,{state:{room,userEmail}});
+  //   // }
+  // };
   return (
     <>
       {isLoading ? <Loading /> : ""}
