@@ -8,8 +8,8 @@ const RoomPage = () => {
   const firebase = useFirebase();
   const CurrentUserName = firebase.userName;
   const myMeeting = async (element) => {
-    const appID = 816160112;
-    const serverSecret = "869d8976f4613c9c9f776f6542db686c";
+    const appID = 705193319;
+    const serverSecret = "c2ff4e6a0159a0747893ba39ac625a3d";
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
       appID,
       serverSecret,
