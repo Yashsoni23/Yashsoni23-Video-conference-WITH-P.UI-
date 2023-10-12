@@ -93,12 +93,22 @@ export const FirebaseProvider = (props) => {
   const signout = async () => {
     return await signOut(auth);
   };
-  const signInWIthGoogle = async () => {
-    return await signInWithPopup(auth, provider).then((result) => {
-      if (result.user) {
-      }
-    });
-  };
+  const signInWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    if (user) {
+      setUser(user);
+      console.log("Google Sign-In Successful");
+      // You can add more logic here, like saving the user's information to your database.
+      // Example:
+      // UserDetails(user.displayName, user.email, null, null);
+    }
+  } catch (error) {
+    console.error("Error signing in with Google: ", error);
+  }
+};
+
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FireChat Functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
