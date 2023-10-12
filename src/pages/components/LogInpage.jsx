@@ -63,7 +63,7 @@ const LogIn = () => {
   const SignInGoogle = () => {
     setIsLoading(true);
 
-    firebase.signInWIthGoogle();
+    firebase.signInWithGoogle();
   };
 
   return (
