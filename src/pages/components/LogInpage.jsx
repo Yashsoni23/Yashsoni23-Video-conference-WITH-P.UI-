@@ -117,7 +117,7 @@ const LogIn = () => {
         </button>
 
         <div
-          onClick={SignInGoogle}
+          onClick={()=>SignInGoogle()}
           className="gl cursor-pointer flex gap-5 drop-shadow-2xl p-3 rounded-full bg-white"
         >
           <FcGoogle className="text-3xl drop-shadow-2xl" />
