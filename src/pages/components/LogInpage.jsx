@@ -8,8 +8,8 @@ import { FcGoogle } from "react-icons/fc";
 
 const LogIn = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState();
-  const [Password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
   const firebase = useFirebase();
   const navigate = useNavigate();
   const inputhide = useRef();
@@ -17,7 +17,7 @@ const LogIn = () => {
   const resetbtnhide = useRef();
 
   const toastError = (error) => {
-    toast(`Error : ${error}`, {
+    toast(`Error: ${error}`, {
       type: "error",
       autoClose: true,
     });
@@ -29,7 +29,7 @@ const LogIn = () => {
     });
   };
   const toastResetLinkSented = () => {
-    toast(`Password Link Sented !!`, {
+    toast(`Password Link Sent!!`, {
       type: "success",
       autoClose: true,
     });
@@ -42,17 +42,16 @@ const LogIn = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // console.log(email,Password);
     firebase
       .signIn(email, Password)
       .then((result) => {
         toastSuccess();
         navigate("/Dashboard");
-        // console.log(firebase.isLoggedIn);
-        setIsLoading(false);
       })
       .catch((error) => {
         toastError(error);
+      })
+      .finally(() => {
         setIsLoading(false);
       });
   };
@@ -60,10 +59,19 @@ const LogIn = () => {
     firebase.resetPassword(email);
     toastResetLinkSented();
   };
-  const SignInGoogle = () => {
+
+  const SignInGoogle = async () => {
     setIsLoading(true);
 
-    firebase.signInWithGoogle();
+    try {
+      await firebase.signInWithGoogle();
+      toastSuccess();
+      navigate("/Dashboard");
+    } catch (error) {
+      toastError(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -72,7 +80,7 @@ const LogIn = () => {
       {isLoading ? <Loading /> : ""}
       <form
         action=""
-        className="flex gap-5 w-max p-12  h-1/2 justify-center items-center flex-col"
+        className="flex gap-5 w-max p-12 h-1/2 justify-center items-center flex-col"
       >
         <div className="flex flex-col gap-4">
           <div className="flex justify-center items-center w-[100px] h-[100px] bg-cyan-900 rounded-full">
@@ -117,7 +125,7 @@ const LogIn = () => {
         </button>
 
         <div
-          onClick={()=>SignInGoogle()}
+          onClick={SignInGoogle}
           className="gl cursor-pointer flex gap-5 drop-shadow-2xl p-3 rounded-full bg-white"
         >
           <FcGoogle className="text-3xl drop-shadow-2xl" />
@@ -130,7 +138,7 @@ const LogIn = () => {
           onClick={handleReset}
           className="font-bold text-sm hover:text-blue-900 text-blue-600 cursor-pointer"
         >
-          Foregotten your password?
+          Forgotten your password?
         </h6>
       </form>
     </>
