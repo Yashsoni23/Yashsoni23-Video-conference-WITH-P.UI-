@@ -140,7 +140,7 @@ export const FirebaseProvider = (props) => {
           userDetail,
           userName,
           isLoggedIn,
-          signInWIthGoogle,
+          signInWithGoogle,
           resetPassword,
           sendMessage,
           db,
